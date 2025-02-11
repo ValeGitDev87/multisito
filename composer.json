@@ -1,0 +1,11 @@
+{
+    "name": "utente/piccolo-framework",
+    "description": "Un piccolo framework PHP",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        }
+    }
+}
