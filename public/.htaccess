@@ -1,11 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /
+    RewriteBase /multisito/public/
 
-    # Se il file o la cartella richiesta esiste, usalo direttamente
+    # Se il file o la cartella richiesta non esiste, reindirizza tutte le richieste a index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-
-    # Altrimenti, reindirizza tutte le richieste a index.php
     RewriteRule ^ index.php [QSA,L]
 </IfModule>

@@ -5,8 +5,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Includi l'autoloader di Composer
-require_once __DIR__ . '/../vendor/autoload.php';
+
 
 // Messaggio temporaneo per verificare che l'autoloading funzioni
 echo "Autoloading funzionante!";

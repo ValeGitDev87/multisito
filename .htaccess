@@ -1,9 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /multisito/
 
-    # Se la richiesta non inizia già con /public/...
-    RewriteCond %{REQUEST_URI} !^/public/
+    # Se l'URL è esattamente vuoto, internamente riscrivi a public/
+    RewriteRule ^$ public/ [L]
 
-    # ... reindirizza tutte le richieste alla cartella public mantenendo il percorso
-    RewriteRule ^(.*)$ public/$1 [L]
+    # Se l'URL non inizia con "public/", riscrivi internamente aggiungendo public/
+    RewriteRule ^(?!public/)(.*)$ public/$1 [L]
 </IfModule>
