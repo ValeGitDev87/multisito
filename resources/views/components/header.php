@@ -22,7 +22,5 @@ $cssFiles = $config->get('app.assets.css');
     ?>
 </head>
 <body>
-    <header>
-        <h1><?php echo $config->get('app.name'); ?></h1>
-    </header>
-<h1>ciaoo</h1>
+    
+

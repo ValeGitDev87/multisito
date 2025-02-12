@@ -10,12 +10,11 @@ return [
             'css' => [
                 // Puoi definire un array associativo in cui la chiave è un nome identificativo e il valore è il percorso del file CSS
                 'main'  => '/multisito/public/css/main.css',
-                'theme' => '/multisito/public/css/theme.css',
                 'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'
             ],
             'js'  => [
                 'app'    => '/multisito/public/js/app.js',
-                'vendor' => '/multisito/public/js/vendor.js',
+                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
             ],
         ],
 
@@ -29,7 +28,7 @@ return [
     ],
      'meta' => [
         // Titolo predefinito: questo può essere sovrascritto a livello di pagina nel controller se necessario
-        'title'       => 'Il Mio Sito - Titolo Predefinito',
+        'title'       => 'Framework PHP',
         // Descrizione predefinita per il sito (utile per la SEO)
         'description' => 'Questa è la descrizione predefinita del sito. Viene utilizzata per indicizzare il contenuto e per i social media, se non specificata diversamente per la pagina.',
         // Parole chiave (keywords) predefinite
