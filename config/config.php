@@ -20,11 +20,12 @@ return [
 
     ],
     'db' => [
+        'name' => 'multisito',
         'host'     => 'localhost',
-        'dbname'   => 'nome_database',
-        'username' => 'utente',
-        'password' => 'password',
-        'charset'  => 'utf8mb4'
+        'dbname'   => 'multisito',
+        'username' => 'root',
+        'password' => 'root',
+        'charset'  => 'utf8_general_ci'
     ],
      'meta' => [
         // Titolo predefinito: questo può essere sovrascritto a livello di pagina nel controller se necessario

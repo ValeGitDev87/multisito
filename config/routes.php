@@ -10,6 +10,10 @@ return [
         'controller' => 'App\Controllers\AboutController',
         'method' => 'index'
     ],
+    '/test' => [
+        'controller' => 'App\Controllers\DatabaseTestController',
+        'method' => 'index'
+    ],
     '/user/{id}' => [
         'controller' => 'App\Controllers\UserController',
         'method' => 'show'
