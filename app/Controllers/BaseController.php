@@ -8,12 +8,20 @@ class BaseController {
      * @param string $view  Nome della view (es. 'home' per app/Views/home.php)
      * @param array  $data  Dati da passare alla view
      */
-    protected function view($view, $data = []) {
+    protected function view($view, $data = [],$auth = false) {
         // Estrai i dati in variabili
         extract($data);
 
-        // Percorso corretto per la cartella views (partendo dalla root del progetto)
+    
+     
+        if ($auth) {
+          $viewPath = realpath(__DIR__ . '/../../resources/auth/' . $view . '.php');
+        }
+        else {  
+              // Percorso corretto per la cartella views (partendo dalla root del progetto)
         $viewPath = realpath(__DIR__ . '/../../resources/views/' . $view . '.php');
+        }
+      
 
         // Controllo se il file esiste
         if (!file_exists($viewPath)) {

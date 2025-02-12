@@ -10,42 +10,99 @@ class Router {
     }
 
     public function dispatch() {
-        // Estrae l'URI della richiesta
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        // Rimuove la parte di base se il progetto è in una sottocartella, ad esempio "/multisito"
-        $base = '/multisito';
-        if (strpos($uri, $base) === 0) {
-            $uri = substr($uri, strlen($base));
-        }
-
-        // Rimuove la barra finale, se presente, e assicura che l'URI sia "/" se vuoto
         $uri = rtrim($uri, '/');
+    
+        // Leggiamo il base URL dal config
+        $config = require __DIR__ . '/../config/config.php';
+        $baseUrl = $config['app']['base_url'];
+    
+        // Se l'URI inizia con il base_url, lo rimuoviamo
+        if ($baseUrl !== '/' && strpos($uri, $baseUrl) === 0) {
+            $uri = substr($uri, strlen($baseUrl));
+        }
+    
+        // Se l'URI è vuoto, lo settiamo a "/"
         if ($uri === '') {
             $uri = '/';
         }
-
-        // Debug (facoltativo): puoi stampare l'URI per verificare che sia corretto
-        // echo "URI: " . $uri;
-
-        // Verifica se la rotta esiste nell'array di rotte
+    
+    
+    
+        // Controllo delle rotte statiche
         if (array_key_exists($uri, $this->routes)) {
-            $controllerName = $this->routes[$uri]['controller'];
-            $method = $this->routes[$uri]['method'];
+            $this->executeRoute($this->routes[$uri]);
+            return;
+        }
+    
+        // Controllo delle rotte dinamiche
+        foreach ($this->routes as $route => $options) {
+            $pattern = preg_replace('/\{(\w+)\}/', '(\w+)', $route);
+            if (preg_match("#^$pattern$#", $uri, $matches)) {
+                array_shift($matches);
+                $this->executeRoute($options, $matches);
+                return;
+            }
+        }
+    
+        // Se nessuna rotta corrisponde, mostra 404
+        http_response_code(404);
+        echo "<pre>404 Not Found - URI richiesto: $uri</pre>";
+    }
+    
+    
 
-            if (class_exists($controllerName)) {
-                $controller = new $controllerName;
-                if (method_exists($controller, $method)) {
-                    return $controller->$method();
-                } else {
-                    echo "Il metodo $method non esiste in $controllerName";
-                }
+/*     private function executeRoute($routeOptions, $params = []) {
+        $controllerName = $routeOptions['controller'];
+        $method = $routeOptions['method'];
+
+        if (class_exists($controllerName)) {
+            $controller = new $controllerName;
+            if (method_exists($controller, $method)) {
+                call_user_func_array([$controller, $method], $params);
+                return;
             } else {
-                echo "Il controller $controllerName non esiste";
+                echo "Errore: Il metodo $method non esiste in $controllerName";
             }
         } else {
-            http_response_code(404);
-            echo "404 Not Found";
+            echo "Errore: Il controller $controllerName non esiste";
+        }
+    } */
+   
+    private function executeRoute($routeOptions, $params = []) {
+        $controllerName = $routeOptions['controller'];
+        $method = $routeOptions['method'];
+    
+        if (class_exists($controllerName)) {
+            // 🔥 Usa Reflection per ottenere il costruttore del controller
+            $reflector = new \ReflectionClass($controllerName);
+            $constructor = $reflector->getConstructor();
+            $dependencies = [];
+    
+            if ($constructor) {
+                foreach ($constructor->getParameters() as $param) {
+                    $paramClass = $param->getType() ? $param->getType()->getName() : null;
+                    if ($paramClass && class_exists($paramClass)) {
+                        // Se la classe esiste, la creiamo automaticamente
+                        $dependencies[] = new $paramClass();
+                    } else {
+                        $dependencies[] = null; // Se non esiste, passa null
+                    }
+                }
+            }
+    
+            // 🚀 Istanzia il controller con le dipendenze richieste
+            $controller = $reflector->newInstanceArgs($dependencies);
+    
+            if (method_exists($controller, $method)) {
+                call_user_func_array([$controller, $method], $params);
+                return;
+            } else {
+                echo "Errore: Il metodo $method non esiste in $controllerName";
+            }
+        } else {
+            echo "Errore: Il controller $controllerName non esiste";
         }
     }
+    
 }

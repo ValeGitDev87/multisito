@@ -10,9 +10,12 @@ return [
         'controller' => 'App\Controllers\AboutController',
         'method' => 'index'
     ],
-    '/home' => [
-        'controller' => 'App\Controllers\HomeController',
-        'method' => 'index'
+    '/user/{id}' => [
+        'controller' => 'App\Controllers\UserController',
+        'method' => 'show'
     ],
-
+    '/post/{slug}' => [
+        'controller' => 'App\Controllers\PostController',
+        'method' => 'show'
+    ],
 ];
