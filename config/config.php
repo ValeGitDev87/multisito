@@ -10,11 +10,15 @@ return [
             'css' => [
                 // Puoi definire un array associativo in cui la chiave è un nome identificativo e il valore è il percorso del file CSS
                 'main'  => '/multisito/public/css/main.css',
-                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'
+                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
+                'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css',
+            
             ],
             'js'  => [
                 'app'    => '/multisito/public/js/app.js',
-                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'
+                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+                'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js',
+                'sweetalert'=>'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js'
             ],
         ],
 

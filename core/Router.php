@@ -50,26 +50,9 @@ class Router {
         echo "<pre>404 Not Found - URI richiesto: $uri</pre>";
     }
     
-    
-
-/*     private function executeRoute($routeOptions, $params = []) {
-        $controllerName = $routeOptions['controller'];
-        $method = $routeOptions['method'];
-
-        if (class_exists($controllerName)) {
-            $controller = new $controllerName;
-            if (method_exists($controller, $method)) {
-                call_user_func_array([$controller, $method], $params);
-                return;
-            } else {
-                echo "Errore: Il metodo $method non esiste in $controllerName";
-            }
-        } else {
-            echo "Errore: Il controller $controllerName non esiste";
-        }
-    } */
    
-    private function executeRoute($routeOptions, $params = []) {
+    private function executeRoute($routeOptions, $params = [])
+    {
         $controllerName = $routeOptions['controller'];
         $method = $routeOptions['method'];
     

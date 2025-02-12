@@ -22,4 +22,12 @@ return [
         'controller' => 'App\Controllers\PostController',
         'method' => 'show'
     ],
+    '/login' => [
+        'controller' => 'App\Controllers\AuthController',
+        'method' => 'login'
+    ],
+    '/logout' => [
+        'controller' => 'App\Controllers\AuthController',
+        'method' => 'logout'
+    ]
 ];
