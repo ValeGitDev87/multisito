@@ -1,15 +1,19 @@
 <?php
 // public/index.php
 
-// Attivazione del reporting degli errori in ambiente di sviluppo
+// Attivazione del reporting degli errori per lo sviluppo (da disattivare in produzione)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Includi l'autoloader generato da Composer
+require_once __DIR__ . '/../vendor/autoload.php';
+
+// Usa il namespace della classe Router (definita in core/Router.php)
+use Core\Router;
+
+// Istanzia il router, carica le rotte definite nel file di configurazione e dispatcha la richiesta
+$router = new Router;
+$router->loadRoutes(__DIR__ . '/../config/routes.php')->dispatch();
 
 
-// Messaggio temporaneo per verificare che l'autoloading funzioni
-echo "Autoloading funzionante!";
 
-// Da qui in poi, potrai istanziare classi del tuo framework, ad esempio:
-// $router = new Core\Router();
-// ecc.
