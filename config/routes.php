@@ -26,6 +26,11 @@ return [
         'controller' => 'App\Controllers\AuthController',
         'method' => 'login'
     ],
+    '/register' => [
+        'controller' => 'App\Controllers\RegisterController',
+        'method' => 'register'
+    ],
+
     '/logout' => [
         'controller' => 'App\Controllers\AuthController',
         'method' => 'logout'

@@ -5,24 +5,26 @@ use Core\Request;
 use Core\Session;
 use App\Models\User;
 
-class AuthController extends BaseController
-{
+class AuthController extends BaseController {
     protected $request;
 
     public function __construct(Request $request) {
         $this->request = $request;
     }
 
-    public function login()
-    {
+    public function login() {
         if ($this->request->isPost()) {
             $email = $this->request->post('email');
+            $password = $this->request->post('password');
             $user = User::findByEmail($email);
 
-            if ($user) {
-                // Simuliamo il login (in un caso reale dovremmo verificare una password hashata)
+            if ($user && sodium_crypto_pwhash_str_verify($user->password, $password)) {
+                // Login riuscito: salviamo l'utente nella sessione
                 Session::set('user_id', $user->id);
                 Session::set('user_name', $user->name);
+                Session::set('user_surname', $user->surname);
+
+
                 echo json_encode(['success' => true, 'message' => "Benvenuto, {$user->name}!"]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Credenziali non valide.']);
@@ -33,8 +35,7 @@ class AuthController extends BaseController
         $this->view('login', ['title' => 'Login']);
     }
 
-    public function logout()
-    {
+    public function logout() {
         Session::destroy();
         header("Location: /");
         exit;

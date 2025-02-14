@@ -12,7 +12,7 @@ class DatabaseTestController extends BaseController
 
         try {
             $result = ORM::for_table('users')->find_one();
-            $message = $result ? "Connessione riuscita! Utente trovato: " . $result->nome : "Connessione OK ma nessun utente trovato.";
+            $message = $result ? "Connessione riuscita! Utente trovato: " . $result->name : "Connessione OK ma nessun utente trovato.";
             
         } catch (\Exception $e) {
             $message = "Errore di connessione: " . $e->getMessage();

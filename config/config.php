@@ -8,13 +8,17 @@ return [
         // 'base_url' => 'https://tuo-dominio.com',  // In produzione
         'assets'   => [
             'css' => [
-                // Puoi definire un array associativo in cui la chiave è un nome identificativo e il valore è il percorso del file CSS
+                
+                'login' => '/multisito/public/css/login.css',
+                'register' => '/multisito/public/css/register.css',
                 'main'  => '/multisito/public/css/main.css',
                 'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
                 'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css',
             
             ],
             'js'  => [
+                'register' => '/multisito/public/js/register.js',
+                'login' => '/multisito/public/js/login.js',
                 'app'    => '/multisito/public/js/app.js',
                 'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
                 'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js',

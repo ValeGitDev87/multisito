@@ -67,4 +67,12 @@ class Validator {
     public function errors() {
         return $this->errors;
     }
+
+
+    protected function unique($field, $value, $param) {
+        $exists = ORM::for_table($param)->where($field, $value)->find_one();
+        if ($exists) {
+            $this->errors[$field][] = "Il valore di $field è già in uso.";
+        }
+    }
 }
