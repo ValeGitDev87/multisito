@@ -17,8 +17,7 @@ return [
             
             ],
             'js'  => [
-                'register' => '/multisito/public/js/register.js',
-                'login' => '/multisito/public/js/login.js',
+        
                 'app'    => '/multisito/public/js/app.js',
                 'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
                 'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js',

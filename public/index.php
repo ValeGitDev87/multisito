@@ -1,5 +1,5 @@
 <?php
-// public/index.php
+
 
 // Attivazione del reporting degli errori per lo sviluppo (da disattivare in produzione)
 ini_set('display_errors', 1);
@@ -10,6 +10,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // Usa il namespace della classe Router (definita in core/Router.php)
 use Core\Router;
+
+
+
 
 // Istanzia il router, carica le rotte definite nel file di configurazione e dispatcha la richiesta
 $router = new Router;

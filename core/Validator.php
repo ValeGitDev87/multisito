@@ -1,6 +1,6 @@
 <?php
 namespace Core;
-
+use ORM;
 class Validator {
     protected $errors = [];
 

@@ -3,14 +3,26 @@
 use Core\Config;
 
 $config = Config::getInstance();
-$baseUrl = $config->get('app.base_url');    
+$baseUrl = $config->get('app.base_url');
+$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
+
+$url = $baseUrl.'/register';
+
+$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
+$url = trim($baseUrl, '/') . '/register'; // Assicura che il baseUrl non abbia slash extra
+
+if ($currentPath === $url) {
+    echo '<script src="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $baseUrl . '/public/js/register.js"></script>';
+} 
+
 ?>
 <div class="container ">
+
     <div class="row d-flex justify-content-center align-items-center ">
         <div class="col-md-6 col-12  mt-5">
 
         <h1>Registrati</h1>
-        <form class="p-4 border rounded shadow bg-light mt-5">
+        <form id="registerForm" class="p-4 border rounded shadow bg-light mt-5">
             <div class="mb-3">
                 <label for="name" class="form-label">Nome Utente</label>
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp" required>

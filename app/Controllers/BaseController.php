@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+
 class BaseController {
     /**
      * Renderizza una view all'interno di un layout.

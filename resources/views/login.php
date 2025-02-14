@@ -3,7 +3,16 @@
 use Core\Config;
 
 $config = Config::getInstance();
-$baseUrl = $config->get('app.base_url');    
+$baseUrl = $config->get('app.base_url');  
+
+$url = $baseUrl.'/login';
+
+$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
+$url = trim($baseUrl, '/') . '/register'; // Assicura che il baseUrl non abbia slash extra
+
+if ($currentPath === $url) {
+    echo '<script src="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $baseUrl . '/public/js/login.js"></script>';
+} 
 ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center ">
