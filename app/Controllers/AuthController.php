@@ -4,18 +4,17 @@ namespace App\Controllers;
 use Core\Request;
 use Core\Session;
 use App\Models\User;
+use Core\Config;
 
 class AuthController extends BaseController {
+
     protected $request;
+    public function login(Request $request) 
+    {
 
-    public function __construct(Request $request) {
-        $this->request = $request;
-    }
-
-    public function login() {
-        if ($this->request->isPost()) {
-            $email = $this->request->post('email');
-            $password = $this->request->post('password');
+        if ($request->isPost()) {
+            $email = $request->post('email');
+            $password = $request->post('password');
             $user = User::findByEmail($email);
 
             if ($user && sodium_crypto_pwhash_str_verify($user->password, $password)) {
@@ -36,8 +35,13 @@ class AuthController extends BaseController {
     }
 
     public function logout() {
+
+        $baseUrl = Config::getInstance()->get('app.base_url', '/');
+
         Session::destroy();
-        header("Location: /");
+
+        header("Location: {$baseUrl}/");
+
         exit;
     }
 }

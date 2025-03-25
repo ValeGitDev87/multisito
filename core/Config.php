@@ -24,6 +24,7 @@ class Config {
 
     // Metodo per recuperare una configurazione usando la dot notation, ad esempio 'app.base_url'
     public function get($key, $default = null) {
+        
         $keys = explode('.', $key);
         $value = $this->settings;
 

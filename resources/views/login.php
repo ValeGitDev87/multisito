@@ -1,18 +1,18 @@
 
 <?php
+
 use Core\Config;
+use Core\Script;
 
+// Recupera l'istanza della configurazione
 $config = Config::getInstance();
-$baseUrl = $config->get('app.base_url');  
+$baseUrl = $config->get('app.base_url');
+// Crea un'istanza di ScriptManagement
+$scriptManager = new Script($config);
 
-$url = $baseUrl.'/login';
+// Renderizza lo script solo se siamo in /login
+$scriptManager->render('login.js', '/login');
 
-$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
-$url = trim($baseUrl, '/') . '/register'; // Assicura che il baseUrl non abbia slash extra
-
-if ($currentPath === $url) {
-    echo '<script src="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $baseUrl . '/public/js/login.js"></script>';
-} 
 ?>
 <div class="container">
     <div class="row d-flex justify-content-center align-items-center ">

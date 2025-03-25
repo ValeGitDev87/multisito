@@ -4,35 +4,40 @@
 return [
     '/' => [
         'controller' => 'App\Controllers\HomeController',
-        'method' => 'index'
+        'method' => 'index',
+        'middleware' => \App\Middlewares\AuthMiddleware::class
+        
     ],
     '/about' => [
         'controller' => 'App\Controllers\AboutController',
         'method' => 'index'
     ],
-    '/test' => [
+        /* '/test' => [
         'controller' => 'App\Controllers\DatabaseTestController',
         'method' => 'index'
-    ],
-    '/user/{id}' => [
+    ], */
+        /* '/user/{id}' => [
         'controller' => 'App\Controllers\UserController',
         'method' => 'show'
-    ],
-    '/post/{slug}' => [
-        'controller' => 'App\Controllers\PostController',
-        'method' => 'show'
-    ],
+    ], */
+
     '/login' => [
         'controller' => 'App\Controllers\AuthController',
-        'method' => 'login'
+        'method'     => 'login',
+        'middleware' => \App\Middlewares\GuestMiddleware::class
     ],
+
     '/register' => [
         'controller' => 'App\Controllers\RegisterController',
-        'method' => 'register'
+        'method'     => 'register',
+        'middleware' => \App\Middlewares\GuestMiddleware::class
     ],
+
 
     '/logout' => [
         'controller' => 'App\Controllers\AuthController',
         'method' => 'logout'
     ]
+    
+
 ];
