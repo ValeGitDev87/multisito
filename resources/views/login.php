@@ -26,8 +26,8 @@ $scriptManager->render('login.js', '/login');
           
             </div>
             <div class="mb-3">
-                <label for="pwd" class="form-label">Password</label>
-                <input type="password" class="form-control" id="pwd" required>
+                <input type="password" id="pwd" autocomplete="new-password" required>
+                <input type="password" id="pwdConfirm" autocomplete="new-password" required>
             </div>
     
             <button type="submit" class="btn btn-success">Login</button>

@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("loginForm").addEventListener("submit", function (event) {
+    const loginForm = document.getElementById("loginForm");
+
+    if (!loginForm) return;
+
+    loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
         const formData = new FormData(this);
@@ -7,19 +11,35 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`${baseUrl}/login`, {
             method: "POST",
             body: formData,
+            credentials: "same-origin" // 🔐 mantiene cookie/sessione
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                toastr.success(data.message);
-                setTimeout(() => window.location.href = "/", 1500);
+                if (typeof toastr !== "undefined") {
+                    toastr.success(data.message);
+                } else {
+                    console.log(data.message);
+                }
+
+                setTimeout(() => {
+                    window.location.href = `${baseUrl}/`;
+                }, 1500);
             } else {
-                toastr.error(data.message);
+                if (typeof toastr !== "undefined") {
+                    toastr.error(data.message || "Credenziali non valide.");
+                } else {
+                    console.error(data.message || "Errore nel login.");
+                }
             }
         })
         .catch(error => {
-            toastr.error("Errore di rete.");
-            console.error(error);
+            if (typeof toastr !== "undefined") {
+                toastr.error("Errore di rete.");
+            } else {
+                console.error("Errore di rete.", error);
+            }
         });
     });
 });
+

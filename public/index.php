@@ -10,6 +10,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 // Usa il namespace della classe Router (definita in core/Router.php)
 use Core\Router;
+use Core\Database;
+Database::getInstance();
 
 
 // Istanzia il router, carica le rotte definite nel file di configurazione e dispatcha la richiesta

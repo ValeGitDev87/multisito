@@ -1,26 +1,45 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let registerForm = document.getElementById("registerForm");
+    const registerForm = document.getElementById("registerForm");
 
-    if (registerForm) { // Controlla se il form esiste nella pagina
-        registerForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+    if (!registerForm) return;
 
-            let formData = new FormData(this);
+    registerForm.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-            fetch(`${baseUrl}/register`, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+        const formData = new FormData(this);
+
+        fetch(`${baseUrl}/register`, {
+            method: "POST",
+            body: formData,
+            credentials: "same-origin" // 👈 fondamentale per usare le sessioni
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (typeof toastr !== "undefined") {
                     toastr.success(data.message);
-                    setTimeout(() => window.location.href = "/login", 2000);
                 } else {
-                    toastr.error(data.message);
+                    console.log(data.message);
                 }
-            })
-            .catch(error => toastr.error("Errore di connessione al server."));
+
+                setTimeout(() => {
+                    window.location.href = `${baseUrl}/login`;
+                }, 2000);
+            } else {
+                if (typeof toastr !== "undefined") {
+                    toastr.error(data.message || "Errore di validazione.");
+                } else {
+                    console.error(data.message || "Errore di validazione.");
+                }
+            }
+        })
+        .catch(error => {
+            if (typeof toastr !== "undefined") {
+                toastr.error("Errore di connessione al server.");
+            } else {
+                console.error("Errore di connessione al server.", error);
+            }
         });
-    }
+    });
 });
+console.log(baseUrl)
