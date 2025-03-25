@@ -37,4 +37,9 @@ class Config {
         }
         return $value;
     }
+
+    public static function getValue($key, $default = null) {
+        return self::getInstance()->get($key, $default);
+    }
+    
 }

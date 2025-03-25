@@ -1,6 +1,9 @@
 <?php
 namespace Core;
 
+require_once"Config.php";
+
+
 class Router {
     protected $routes = [];
 
@@ -47,7 +50,29 @@ class Router {
     
         // Se nessuna rotta corrisponde, mostra 404
         http_response_code(404);
-        echo "<pre>404 Not Found - URI richiesto: $uri</pre>";
+        $baseUrl = Config::getInstance()->get('app.base_url', '/');
+
+        echo "<div style=\"max-width: 800px; margin: 50px auto; padding: 20px; text-align: center; background-color: #f9f9f9; border-radius: 10px;\">
+            <img src=\"{$baseUrl}/public/assets/img/notfound.jpg\" style=\"width: 100%; \">
+            <br>
+            <a href=\"{$baseUrl}\" style=\"
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                font-family: sans-serif;
+                transition: background-color 0.3s ease;
+            \" 
+            onmouseover=\"this.style.backgroundColor='#0056b3'\"
+            onmouseout=\"this.style.backgroundColor='#007bff'\"
+            >
+                Torna alla Home
+            </a>
+        </div>";
+        
     }
     
    

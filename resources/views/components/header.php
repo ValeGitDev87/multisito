@@ -14,6 +14,10 @@ $cssFiles = $config->get('app.assets.css');
     <meta name="keywords" content="<?php echo isset($meta['keywords']) ? $meta['keywords'] : $config->get('meta.keywords'); ?>">
     <meta name="viewport" content="<?php echo isset($meta['viewport']) ? $meta['viewport'] : $config->get('meta.viewport'); ?>">
     <meta name="author" content="<?php echo isset($meta['author']) ? $meta['author'] : $config->get('meta.author'); ?>">
+    <script>
+        const baseUrl = "<?= url('') ?>";
+    </script>
+
     <?php
     // Include tutti i file CSS definiti nel config
     foreach ($cssFiles as $css) {

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let formData = new FormData(this);
 
-            fetch("/register", {
+            fetch(`${baseUrl}/register`, {
                 method: "POST",
                 body: formData
             })
