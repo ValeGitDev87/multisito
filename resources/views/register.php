@@ -1,19 +1,16 @@
 
 <?php
 use Core\Config;
+use Core\Script;
 
 $config = Config::getInstance();
 $baseUrl = $config->get('app.base_url');
-$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
 
-$url = $baseUrl.'/register';
+// Crea un'istanza di ScriptManagement
+$scriptManager = new Script($config);
 
-$currentPath = trim($_SERVER['REQUEST_URI'], '/'); // Rimuove eventuali slash iniziali/finali    
-$url = trim($baseUrl, '/') . '/register'; // Assicura che il baseUrl non abbia slash extra
 
-if ($currentPath === $url) {
-    echo '<script src="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $baseUrl . '/public/js/register.js"></script>';
-} 
+$script= $scriptManager->render('register.js', '/register');
 
 ?>
 <div class="container ">
@@ -24,31 +21,31 @@ if ($currentPath === $url) {
         <h1>Registrati</h1>
         <form id="registerForm" class="p-4 border rounded shadow bg-light mt-5">
             <div class="mb-3">
-                <label for="name" class="form-label">Nome Utente</label>
-                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" required>
+                <label for="name" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
            
             </div>
 
             <div class="mb-3">
                 <label for="surname" class="form-label">Cognome</label>
-                <input type="text" class="form-control" id="surname" aria-describedby="surnameHelp" require>
+                <input type="text" class="form-control" id="surname" name="surname" aria-describedby="surnameHelp" require>
             </div>
 
             <div class="mb-3">
                 <label for="emai" class="form-label">Email </label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
   
             </div>
 
             <div class="mb-3">
                 <label for="pwd" class="form-label">Password</label>
-                <input type="password" class="form-control" id="pwd" required>
+                <input type="password" class="form-control" id="pwd" name="password" required>
             </div>
 
 
             <div class="mb-3">
                 <label for="pwdConfirm" class="form-label">Conferma Password</label>
-                <input type="password" class="form-control" id="pwdConfirm" required>
+                <input type="password" class="form-control" id="pwdConfirm" name="password_confirmation" required>
             </div>
 
             <button type="submit" class="btn btn-success">Registrati</button>

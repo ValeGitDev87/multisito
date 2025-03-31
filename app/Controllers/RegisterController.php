@@ -7,6 +7,7 @@ use App\Models\User;
 use ORM;
 
 class RegisterController extends BaseController {
+
     protected $request;
     protected $validator;
 
@@ -16,9 +17,12 @@ class RegisterController extends BaseController {
     }
 
     public function register() {
+        
         if ($this->request->isPost()) {
+            
             $data = $this->request->all();
 
+            header('Content-Type: application/json');
             //  Definiamo le regole di validazione
             $rules = [
                 'name'     => 'required|min:3|max:50',
@@ -29,6 +33,7 @@ class RegisterController extends BaseController {
 
             //  Applichiamo la validazione
             if (!$this->validator->validate($data, $rules)) {
+                header('Content-Type: application/json');
                 echo json_encode(['success' => false, 'message' => implode(" ", array_map(fn($e) => implode(" ", $e), $this->validator->errors()))]);
                 exit;
             }
@@ -41,15 +46,21 @@ class RegisterController extends BaseController {
             );
 
             //  Salviamo l'utente nel database
-            $user = ORM::for_table('users')->create();
-            $user->name = $data['name'];
-            $user->surname = $data['surname'];
-            $user->email = $data['email'];
-            $user->password = $hashedPassword;
-            $user->save();
-
-            echo json_encode(['success' => true, 'message' => 'Registrazione completata! Ora puoi accedere.']);
-            exit;
+            $user = User::create([
+                'name'     => $data['name'],
+                'surname'  => $data['surname'],
+                'email'    => $data['email'],
+                'password' => $hashedPassword
+            ]);
+            
+            if ($user) {
+                echo json_encode(['success' => true, 'message' => 'Registrazione completata! Ora puoi accedere.']);
+                exit;
+            }else {
+                echo json_encode(['success' => false, 'message' => 'Attenzione! Errore durante la registrazione.']);
+                exit;
+            }
+    
         }
 
         $this->view('register', ['title' => 'Registrati']);

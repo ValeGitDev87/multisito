@@ -1,7 +1,4 @@
 <?php
-use Core\Session;
-
-Session::start(); // Questo fa partire la sessione in modo sicuro
 
 if (!empty($message)) :
 ?>

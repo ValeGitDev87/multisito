@@ -12,20 +12,27 @@ class Script {
         $this->config = $config; // Salva l'istanza della configurazione
     }
 
-    public function  render($script, $includePath)
+    public function render($script, $includePath)
     {
-        // Usa direttamente l'istanza già passata nel costruttore
         $baseUrl = $this->config->get('app.base_url');
-
-        // Ottieni il percorso attuale della pagina
-        $currentPath = trim($_SERVER['REQUEST_URI'], '/');
-
-        // Costruisci l'URL del file che deve includere lo script
-        $url = trim($baseUrl, '/') . $includePath;
-
-        // Se siamo sulla pagina specificata, stampiamo il tag <script>
-        if ($currentPath === trim($url, '/')) {
+    
+        // Estrai solo il path della URL corrente, senza query string
+        $currentPath = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+    
+        // Normalizza l'includePath: rimuovi eventuali slash all'inizio e alla fine
+        $includePath = trim($includePath, '/');
+    
+        // Costruisci il percorso atteso: ad esempio "multisito/register"
+        // Se il baseUrl è "/multisito", allora trim($baseUrl, '/') restituisce "multisito"
+        $expectedPath = trim($baseUrl, '/') . '/' . $includePath;
+        $expectedPath = trim($expectedPath, '/');
+    
+        // Debug (rimuovi quando funziona)
+        // echo "currentPath: " . $currentPath . "<br>expectedPath: " . $expectedPath;
+    
+        if ($currentPath === $expectedPath) {
             echo '<script src="' . $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $baseUrl . '/public/js/' . $script . '"></script>';
         }
     }
+    
 }

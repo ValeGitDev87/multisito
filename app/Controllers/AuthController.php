@@ -13,6 +13,9 @@ class AuthController extends BaseController {
     {
 
         if ($request->isPost()) {
+
+            header('Content-Type: application/json');
+
             $email = $request->post('email');
             $password = $request->post('password');
             $user = User::findByEmail($email);

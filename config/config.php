@@ -13,16 +13,18 @@ return [
                 'register' => '/multisito/public/css/register.css',
                 'main'  => '/multisito/public/css/main.css',
                 'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
-                'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css',
+              
+          
             
             ],
-            'js'  => [
-        
-                'app'    => '/multisito/public/js/app.js',
-                'bootstrap' => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
-                'tostify'=>'https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.js',
-                'sweetalert'=>'https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js'
-            ],
+            
+        'js'  => [
+            'app'        => '/multisito/public/js/app.js',
+            'bootstrap'  => 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js',
+            'jquery'     => 'https://code.jquery.com/jquery-3.6.0.min.js',
+            'sweetalert' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11'
+        ],
+
         ],
 
     ],

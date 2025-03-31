@@ -30,6 +30,8 @@ class User {
         $user->save();
         return $user;
     }
+
+    
     
     
 }

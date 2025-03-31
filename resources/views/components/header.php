@@ -14,6 +14,7 @@ $cssFiles = $config->get('app.assets.css');
     <meta name="keywords" content="<?php echo isset($meta['keywords']) ? $meta['keywords'] : $config->get('meta.keywords'); ?>">
     <meta name="viewport" content="<?php echo isset($meta['viewport']) ? $meta['viewport'] : $config->get('meta.viewport'); ?>">
     <meta name="author" content="<?php echo isset($meta['author']) ? $meta['author'] : $config->get('meta.author'); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script>
         const baseUrl = "<?= url('') ?>";
     </script>

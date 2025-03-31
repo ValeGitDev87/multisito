@@ -69,10 +69,26 @@ class Validator {
     }
 
 
+    protected function confirm_password($field, $value, $param) {
+        // $param dovrebbe essere il nome del campo da confrontare, ad esempio "password"
+        $passwordValue = $this->data[$param] ?? null;
+        if ($value !== $passwordValue) {
+            $this->errors[$field][] = "Le password non corrispondono.";
+        }
+    }
+
     protected function unique($field, $value, $param) {
+        // $param rappresenta il nome della tabella su cui effettuare il controllo
+        // Ad esempio, se la regola è 'email' => 'required|email|unique:users'
+        // allora $param sarà "users"
+        
+        // Utilizziamo il nostro ORM per verificare se esiste un record in cui il campo $field ha già il valore $value
         $exists = ORM::for_table($param)->where($field, $value)->find_one();
+        
         if ($exists) {
             $this->errors[$field][] = "Il valore di $field è già in uso.";
         }
     }
+    
+
 }

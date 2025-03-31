@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!loginForm) return;
 
+    
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -16,30 +17,31 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                if (typeof toastr !== "undefined") {
-                    toastr.success(data.message);
-                } else {
-                    console.log(data.message);
-                }
+                Swal.fire({
+                    icon: 'success',
+                    title: 'OK',
+                    text: data.message
+                })
 
                 setTimeout(() => {
                     window.location.href = `${baseUrl}/`;
                 }, 1500);
             } else {
-                if (typeof toastr !== "undefined") {
-                    toastr.error(data.message || "Credenziali non valide.");
-                } else {
-                    console.error(data.message || "Errore nel login.");
-                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ops..',
+                    text: data.message
+                })
             }
         })
         .catch(error => {
-            if (typeof toastr !== "undefined") {
-                toastr.error("Errore di rete.");
-            } else {
-                console.error("Errore di rete.", error);
-            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Ops..',
+                text: error.message
+            })
         });
     });
 });
+
 

@@ -16,30 +16,30 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                if (typeof toastr !== "undefined") {
-                    toastr.success(data.message);
-                } else {
-                    console.log(data.message);
-                }
-
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ottimo!',
+                    text: data.message
+                })
                 setTimeout(() => {
                     window.location.href = `${baseUrl}/login`;
                 }, 2000);
             } else {
-                if (typeof toastr !== "undefined") {
-                    toastr.error(data.message || "Errore di validazione.");
-                } else {
-                    console.error(data.message || "Errore di validazione.");
-                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: data.message
+                })
             }
         })
         .catch(error => {
-            if (typeof toastr !== "undefined") {
-                toastr.error("Errore di connessione al server.");
-            } else {
-                console.error("Errore di connessione al server.", error);
-            }
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error.message
+            })
         });
     });
 });
-console.log(baseUrl)
+
+
