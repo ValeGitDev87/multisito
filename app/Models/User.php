@@ -12,6 +12,7 @@ class User {
      * Trova un utente per email.
      */
     public static function findByEmail($email) {
+
         return ORM::for_table(self::$table)->where('email', $email)->find_one();
     }
 
@@ -19,6 +20,7 @@ class User {
      * Crea un nuovo utente in modo sicuro con i campi fillable.
      */
     public static function create(array $data) {
+
         $user = ORM::for_table(self::$table)->create();
 
         foreach (self::$fillable as $field) {
@@ -29,6 +31,26 @@ class User {
 
         $user->save();
         return $user;
+    }
+
+    public static function controlToken($token)
+    {
+        $user = ORM::for_table(self::$table)->where("reset_token",$token)->find_one();
+        if(!empty($user)){
+            $expires = new \DateTime($user->reset_token_expires);
+            $now = new \DateTime();
+            
+            if ($now > $expires) {
+                echo "<div style='padding:50px; margin-top:200px; width:100%; background-color:red; color:white;> 
+    
+                <h2 style:'text-aling:center;'>Attenzione Token Scaduto Rifare la procedura</h2>
+                </div>";
+                exit;
+            }
+        }
+       
+        
+
     }
 
     

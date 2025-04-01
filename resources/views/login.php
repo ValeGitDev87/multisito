@@ -20,7 +20,7 @@ $script= $scriptManager->render('login.js', '/login');
         <div class="col-md-6 col-12  mt-5">
 
         <h1>Login</h1>
-        <h3><?php echo $script."cdsacas"?></h3>
+
         <form id="loginForm" class="p-4 border rounded shadow bg-light mt-5">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
@@ -35,6 +35,7 @@ $script= $scriptManager->render('login.js', '/login');
 
             <button type="submit" class="btn btn-success">Login</button>
             <a href="<?= $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'].$baseUrl ?>/register" class="altrimenti-registrati">altrimenti registrati</a>
+            <a href="<?= $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'].$baseUrl ?>/forgot-password" class="altrimenti-registrati">Password dimenticata?</a>
 
 
         </form>

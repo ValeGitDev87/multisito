@@ -80,10 +80,12 @@ class Router {
     private function executeRoute($routeOptions, $params = []) {
         
         $controllerName = $routeOptions['controller'];
+
         $method = $routeOptions['method'];
         
         // Verifica se vogliamo iniettare dipendenze (default: true)
         $injectDependencies = true;
+
         if (isset($routeOptions['injectDependencies']) && $routeOptions['injectDependencies'] === false) {
             $injectDependencies = false;
         }
@@ -92,7 +94,11 @@ class Router {
             echo "Errore: Il controller $controllerName non esiste";
             return;
         }
-    
+        
+        if(!$method){
+            echo "Errore Metodo Insesitente:".$method;
+            return;
+        }
         // Usa Reflection per ottenere informazioni sulla classe
         $reflector = new \ReflectionClass($controllerName);
         $constructor = $reflector->getConstructor();

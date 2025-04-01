@@ -2,7 +2,8 @@
     "name": "utente/piccolo-framework",
     "description": "Un piccolo framework PHP",
     "require": {
-        "j4mie/idiorm": "^1.5"
+        "j4mie/idiorm": "^1.5",
+        "phpmailer/phpmailer": "^6.9"
     },
     "autoload": {
         "psr-4": {

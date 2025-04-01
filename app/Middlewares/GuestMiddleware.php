@@ -5,7 +5,9 @@ use Core\Session;
 use Core\Config;
 
 class GuestMiddleware {
+
     public static function handle() {
+        
         $baseUrl = Config::getInstance()->get('app.base_url', '/');
 
         // Se l'utente è già loggato → redirect alla home

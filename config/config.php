@@ -24,6 +24,7 @@ return [
             'jquery'     => 'https://code.jquery.com/jquery-3.6.0.min.js',
             'sweetalert' => 'https://cdn.jsdelivr.net/npm/sweetalert2@11'
         ],
+        'mode'=>"developer"
 
         ],
 
@@ -48,4 +49,19 @@ return [
         'author'      => 'Valentino Sciarnè',
     ],
 
+
+        // ... altre configurazioni
+        'mail' => [
+
+            'host'        => 'sandbox.smtp.mailtrap.io',
+            'username'    => 'd5f1d4a4478b08',
+            'password'    => '15828ff6e30676',
+            'port'        => 2525, // oppure 587, a seconda della configurazione Mailtrap
+            'smtp_secure' => null, // oppure 'tls'
+            'from_email'  => 'noreply@tuosito.com',
+            'from_name'   => 'Il Mio Sito'
+        ],
+
+
+    
 ];

@@ -36,9 +36,25 @@ return [
 
     '/logout' => [
         'controller' => 'App\Controllers\AuthController',
-        'method' => 'logout'
-    ]
-    
+        'method' => 'logout',
+        'middleware' => \App\Middlewares\AuthMiddleware::class
+    ],
+
+    '/forgot-password' => [
+        'controller' => 'App\Controllers\PasswordController',
+        'method'     => 'forgotPassword',
+        "middleware"=>\App\Middlewares\GuestMiddleware::class 
+    ],
+
+    '/reset-password' => [
+        'controller' => 'App\Controllers\PasswordController',
+        'method'     => 'resetPassword',
+        "middleware" => \App\Middlewares\VerifyTokenMiddleware::class
+    ],
+
+
+
+
 
 
 
