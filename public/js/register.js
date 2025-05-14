@@ -6,6 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
     registerForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
+        let pwd = document.getElementById("pwd").value;
+        let pwd2 = document.getElementById("pwdConfirm").value;
+
+        if(pwd !== pwd2){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Le password non corrispondono.'
+            })
+            return;
+        }
         const formData = new FormData(this);
 
         fetch(`${baseUrl}/register`, {

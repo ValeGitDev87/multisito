@@ -9,15 +9,7 @@ use Core\Database;
 use Core\Session;
 use Core\Config;
 
-$mode = Config::getInstance()->get("mode");
 
-/* if($mode === "test"){
-
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-} */
-
-// Usa il namespace della classe Router (definita in core/Router.php)
 
 $session = new Session;
 $session->start();
