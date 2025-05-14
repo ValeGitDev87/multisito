@@ -44,3 +44,11 @@ CREATE TABLE permissions (
 CREATE INDEX idx_permissions_user   ON permissions(user_id);
 CREATE INDEX idx_permissions_suite  ON permissions(suite_id);
 CREATE INDEX idx_permissions_func   ON permissions(function_id);
+
+
+CREATE TABLE IF NOT EXISTS migrations (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  migration   VARCHAR(255) NOT NULL,
+  batch       INT        NOT NULL,
+  migrated_at TIMESTAMP  NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;
